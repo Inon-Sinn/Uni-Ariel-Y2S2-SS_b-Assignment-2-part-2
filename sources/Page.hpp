@@ -11,6 +11,8 @@ namespace ariel{
         private:
 
         std::unordered_map<int,std::string> Lines;
+        
+        // int maxLine = 0;
             
         public:
 
@@ -25,7 +27,7 @@ namespace ariel{
 
             // given the row and col read the given amount of characters, horizontal or vertical
             std::string read(int row,  int col,Direction direc,  int length){
-                return "hi";
+                return "test";
             }
 
             // given the row and col earse the given given amount of characters, horizontal or vertical
