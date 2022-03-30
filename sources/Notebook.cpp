@@ -32,7 +32,7 @@ namespace ariel{
             throw std::invalid_argument("Cant write/read/erase after the end of the line");
         } 
         //check if the legth value is negative
-        if(length < 0){
+        if(lenght < 0){
             throw std::invalid_argument("Length value can't be negative");
         }
     }
@@ -86,7 +86,7 @@ namespace ariel{
         //check the input, the only real test here is for page
         common_checks(page,0,0,Direction::Vertical,0);
 
-        notes[page].show(row,col,direc,length);
+        notes[page].show();
     }
 
 }
