@@ -31,9 +31,13 @@ namespace ariel{
         if(direc==  Direction::Horizontal &&  col+lenght >= row_length){
             throw std::invalid_argument("Cant write/read/erase after the end of the line");
         } 
+        //check if the legth value is negative
+        if(length < 0){
+            throw std::invalid_argument("Length value can't be negative");
+        }
     }
 
-    void test_input(const std::string &text){
+    void string_input_test(const std::string &text){
         for (char const &c: text) {
             if(c=='~'){
                 throw std::invalid_argument("invalid input, contains ~");
@@ -47,47 +51,42 @@ namespace ariel{
 
     void Notebook::write( int page,  int row,  int col, Direction direc, const std::string& input){
 
-        // check 1-4
+        // check the input
         common_checks(page,row,col,direc,input.length());
         
-        // check if the input is correct
-        test_input(input);
+        // check if the given text is ascii
+        string_input_test(input);
         
         // check that we don't write on an erased line
-        test_input(read(page,row,col,direc,input.length()));
+        string_input_test(read(page,row,col,direc,input.length()));
+
+        notes[page].write(row,col,direc,input);
 
     }
 
     std::string Notebook::read( int page,  int row,  int col,Direction direc,  int length){
 
-        //check 1-4
+        //check the input
         common_checks(page,row,col,direc,length);
 
-        //check if the legth value is negative
-        if(length < 0){
-            throw std::invalid_argument("Length value can't be negative");
-        }
-
-        return "empty";
+        return notes[page].read(row,col,direc,length);
     }
 
     void Notebook::erase( int page,  int row,  int col,Direction direc,  int length){
 
-        //check 1-4
+        //check the input
         common_checks(page,row,col,direc,length);
-        
-        //check if the legth value is negative
-        if(length < 0){
-            throw std::invalid_argument("Length value can't be negative");
-        }
+
+        notes[page].erase(row,col,direc,length);
+
     }
 
     void Notebook::show( int page){
+        
+        //check the input, the only real test here is for page
+        common_checks(page,0,0,Direction::Vertical,0);
 
-        // check if the page value is negative
-        if(page < 0){
-            throw std::invalid_argument("Page value can't be negative");
-        }
+        notes[page].show(row,col,direc,length);
     }
 
 }
