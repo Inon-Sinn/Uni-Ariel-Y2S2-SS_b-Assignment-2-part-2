@@ -33,15 +33,29 @@ namespace ariel{
         } 
     }
 
-    
+    void test_input(const std::string &text){
+        for (char const &c: text) {
+            if(c=='~'){
+                throw std::invalid_argument("invalid input, contains ~");
+            }
+            //doesn't work somehow
+            if(c<minChar || c>maxChar){
+                throw std::invalid_argument("invalid char, unprintable");
+            }
+        }
+    }
+
     void Notebook::write( int page,  int row,  int col, Direction direc, const std::string& input){
 
         // check 1-4
         common_checks(page,row,col,direc,input.length());
         
-        // check if the input is printable
-
+        // check if the input is correct
+        test_input(input);
+        
         // check that we don't write on an erased line
+        test_input(read(page,row,col,direc,input.length()));
+
     }
 
     std::string Notebook::read( int page,  int row,  int col,Direction direc,  int length){

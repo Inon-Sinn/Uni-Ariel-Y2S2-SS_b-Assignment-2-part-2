@@ -1,6 +1,9 @@
 #include "Direction.hpp"
 #include <iostream>
 #include <string>
+#include <unordered_map>
+#include <vector>
+#include "Page.hpp"
 
 namespace ariel{
 
@@ -27,6 +30,7 @@ namespace ariel{
         
         private:
         // currently undefined
+            std::unordered_map<int,Page> notes;
 
         public:
 
